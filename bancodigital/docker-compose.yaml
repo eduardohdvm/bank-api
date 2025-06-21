@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: bank-postgres
+    environment:
+      POSTGRES_USER: meuusuario
+      POSTGRES_PASSWORD: minhasenha
+      POSTGRES_DB: bank
+    ports:
+      - "5432:5432"
