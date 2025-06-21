@@ -25,8 +25,8 @@ public class ContaController {
     }
 
     @GetMapping
-    public ResponseEntity<ContaModel> buscarConta(@RequestParam Long numero_conta) {
-        Conta conta = contaService.buscarConta(numero_conta);
+    public ResponseEntity<ContaModel> buscarConta(@RequestParam("numero_conta") Long numeroConta) {
+        Conta conta = contaService.buscarConta(numeroConta);
         return ResponseEntity.ok(contaAssembler.toModel(conta));
     }
 
