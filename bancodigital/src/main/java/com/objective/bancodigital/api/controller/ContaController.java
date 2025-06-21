@@ -5,6 +5,7 @@ import com.objective.bancodigital.api.dto.ContaInput;
 import com.objective.bancodigital.api.dto.ContaModel;
 import com.objective.bancodigital.api.dto.TransacaoInput;
 import com.objective.bancodigital.application.service.ContaService;
+import com.objective.bancodigital.domain.model.Conta;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +20,20 @@ public class ContaController {
 
     @PostMapping
     public ResponseEntity<ContaModel> criarConta(@RequestBody ContaInput contaInput) {
-        // implementar
-        return null;
+        Conta novaConta = contaService.criarConta(contaAssembler.toEntity(contaInput));
+        return ResponseEntity.status(201).body(contaAssembler.toModel(novaConta));
     }
 
     @GetMapping
     public ResponseEntity<ContaModel> buscarConta(@RequestParam Long numero_conta) {
-        // implementar
-        return null;
+        Conta conta = contaService.buscarConta(numero_conta);
+        return ResponseEntity.ok(contaAssembler.toModel(conta));
     }
 
     @PostMapping("/transacao")
     public ResponseEntity<ContaModel> realizarTransacao(@RequestBody TransacaoInput transacaoInput) {
-        // implementar
-        return null;
+        Conta contaAtualizada = contaService.realizarTransacao(transacaoInput);
+        return ResponseEntity.status(201).body(contaAssembler.toModel(contaAtualizada));
     }
 }
+

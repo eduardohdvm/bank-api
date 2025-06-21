@@ -9,13 +9,17 @@ import org.springframework.stereotype.Component;
 public class ContaAssembler {
 
     public Conta toEntity(ContaInput input) {
-        // implementar
-        return null;
+        Conta conta = new Conta();
+        conta.setNumeroConta(input.getNumeroConta());
+        conta.setSaldo(input.getSaldo());
+        return conta;
     }
 
     public ContaModel toModel(Conta conta) {
-        // implementar
-        return null;
+        ContaModel model = new ContaModel();
+        model.setNumeroConta(conta.getNumeroConta());
+        model.setSaldo(conta.getSaldo());
+        return model;
     }
 }
 
