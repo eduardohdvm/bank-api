@@ -6,16 +6,19 @@ import com.objective.bancodigital.domain.exceptions.ContaNaoEncontradaException;
 import com.objective.bancodigital.domain.exceptions.SaldoInsuficienteException;
 import com.objective.bancodigital.domain.model.Conta;
 import com.objective.bancodigital.domain.repository.ContaRepository;
+import com.objective.bancodigital.domain.repository.TransacaoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class ContaServiceTest {
 
     @Autowired
@@ -24,8 +27,12 @@ class ContaServiceTest {
     @Autowired
     private ContaRepository contaRepository;
 
+    @Autowired
+    private TransacaoRepository transacaoRepository;
+
     @BeforeEach
     void setUp() {
+        transacaoRepository.deleteAll();
         contaRepository.deleteAll();
     }
 

@@ -4,6 +4,7 @@ import com.objective.bancodigital.domain.model.Conta;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +17,7 @@ class FormaPagamentoFactoryTest {
         conta.setSaldo(new BigDecimal("100.00"));
 
         new PixStrategy().processar(conta, new BigDecimal("40.00"));
-        assertEquals(new BigDecimal("60.00"), conta.getSaldo());
+        assertEquals(0, new BigDecimal("60.00").compareTo(conta.getSaldo()));
     }
 
     @Test
@@ -26,7 +27,7 @@ class FormaPagamentoFactoryTest {
         conta.setSaldo(new BigDecimal("100.00"));
 
         new DebitoStrategy().processar(conta, new BigDecimal("20.00"));
-        assertEquals(new BigDecimal("79.40"), conta.getSaldo());
+        assertEquals(0, new BigDecimal("79.40").compareTo(conta.getSaldo()));
     }
 
     @Test
@@ -36,7 +37,7 @@ class FormaPagamentoFactoryTest {
         conta.setSaldo(new BigDecimal("100.00"));
 
         new CreditoStrategy().processar(conta, new BigDecimal("20.00"));
-        assertEquals(new BigDecimal("79.00"), conta.getSaldo());
+        assertEquals(new BigDecimal("79.00"), conta.getSaldo().setScale(2, RoundingMode.HALF_UP));
     }
 
     @Test

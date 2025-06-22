@@ -5,9 +5,6 @@ import com.objective.bancodigital.domain.model.Conta;
 import java.math.BigDecimal;
 
 public interface FormaPagamentoStrategy {
-    void processar(Conta conta, BigDecimal valor);
+    BigDecimal processar(Conta conta, BigDecimal valor);
 
-    default BigDecimal calcularValorFinal(BigDecimal valor) {
-        return valor;
-    }
 }

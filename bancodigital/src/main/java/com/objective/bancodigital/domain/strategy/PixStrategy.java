@@ -9,10 +9,11 @@ import java.math.BigDecimal;
 @Component
 public class PixStrategy implements FormaPagamentoStrategy {
     @Override
-    public void processar(Conta conta, BigDecimal valor) {
+    public BigDecimal processar(Conta conta, BigDecimal valor) {
         if (conta.getSaldo().compareTo(valor) < 0) {
-            throw new SaldoInsuficienteException("Saldo insuficiente para pagamento via Pix");
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         }
         conta.setSaldo(conta.getSaldo().subtract(valor));
+        return valor;
     }
 }

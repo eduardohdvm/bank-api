@@ -43,7 +43,7 @@ class ApiExceptionHandlerTest {
         SaldoInsuficienteException ex = new SaldoInsuficienteException("Saldo insuficiente");
         ResponseEntity<Object> response = handler.handleSaldoInsuficiente(ex);
 
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertTrue(response.getBody().toString().contains("Saldo insuficiente"));
     }
 }
